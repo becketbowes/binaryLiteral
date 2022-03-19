@@ -63,7 +63,6 @@ Reader.init(
         //define table config options
         sequelize,
         freezeTableName: true,
-        underscored: true,
         modelName: 'reader'
     }
 );
