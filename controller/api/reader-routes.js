@@ -36,8 +36,26 @@ router.post('/', (req, res) => {
     .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
+router.post('/login', (req, res) => {
+    Reader.findOne({ where: { email: req.body.email }})
+    .then(data => {
+        if (!data) {
+            res.status(400).json({ message: 'no such thing' });
+            return;
+        }
+        res.json({ reader: data })
+        //verify
+        const valid = data.checkPass(req.body.pass);
+        if (!valid) {
+            res.status(400).json({ message: 'not the password' });
+            return;
+        }
+        res.json({ reader: data, message: 'logged in' });
+    });
+});
+
 router.put('/:id', (req, res) => {
-    Reader.update(req.body, { where: { id: req.params.id } })
+    Reader.update(req.body, { individualHooks: true, where: { id: req.params.id } })
     .then(data => {
         if (!data[0]) {
             res.status(404).json({ message: 'file not found' });

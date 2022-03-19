@@ -2,9 +2,11 @@
 const { Model, DataTypes } = require('sequelize');
 //connect to the sequelize instance made in the connection file
 const sequelize = require('../controller/connection');
+//call bcrypt to encrypt user password
+const bcrypt = require('bcrypt');
 
 //create the table 'reader' based on sequelize's model archetype
-class Reader extends Model { }
+class Reader extends Model { checkPass(login) { return bcrypt.compareSync(login, this.pass); }}
 
 //define the reader table that defines users of the site
 Reader.init(
@@ -47,6 +49,17 @@ Reader.init(
         //add foreign keys
     },
     {
+        hooks: {
+            //async hash of user's passcode using bcrypt
+            async beforeCreate(data) {
+                data.pass = await bcrypt.hash(data.pass, 11);
+                return data;
+            },
+            async beforeUpdate(upData) {
+                upData.pass = await bcrypt.hash(upData.pass, 11);
+                return upData;
+            }
+        },
         //define table config options
         sequelize,
         freezeTableName: true,
