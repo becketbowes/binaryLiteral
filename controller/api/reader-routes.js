@@ -25,9 +25,9 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     //expects: {username: Namey McNamerson, password: 1234, email: im@aol.com, writer: true, binary: false, blackpage: true}
     Reader.create({
-        username: req.body.username,
-        email: req.body.password,
-        password: req.body.password,
+        user: req.body.user,
+        email: req.body.email,
+        pass: req.body.pass,
         writer: req.body.writer,
         binary: req.body.binary,
         blackpage: req.body.blackpage

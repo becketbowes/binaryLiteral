@@ -4,21 +4,20 @@ const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../controller/connection');
 
 //create the table 'reader' based on sequelize's model archetype
-class Reader extends Model {}
+class Reader extends Model { }
 
 //define the reader table that defines users of the site
 Reader.init(
     {
-        //define columns
         id: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
-        username: {
+        user: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
         email: {
             type: DataTypes.STRING,
@@ -26,7 +25,7 @@ Reader.init(
             unique: true,
             validate: { isEmail: true }
         },
-        password: {
+        pass: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -44,13 +43,14 @@ Reader.init(
             //user preference for page layout
             type: DataTypes.BOOLEAN,
             defaultValue: true
-        } 
+        }
         //add foreign keys
     },
     {
         //define table config options
         sequelize,
         freezeTableName: true,
+        underscored: true,
         modelName: 'reader'
     }
 );
