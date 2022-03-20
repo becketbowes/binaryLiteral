@@ -5,7 +5,8 @@ const { Reader, Literal } = require('../../models');
 router.get('/', (req, res) => {
     Literal.findAll({
         attributes: ['id', 'title', 'keywords', 'article', 'createdAt'],
-        include: [{ model: Reader, attributes: ['user']}]
+        order: [[ 'createdAt', 'DESC' ]],
+        include: [{ model: Reader, attributes: ['user']}];
         })
     .then(data => res.json(data))
     .catch(err => { console.log(err); res.status(500).json(err) });
