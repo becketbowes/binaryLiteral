@@ -1,14 +1,20 @@
 const sequelize = require('../connection');
 const router = require('express').Router();
-const { Reader, Literal, Neat } = require('../../models');
+const { Reader, Literal, Neat, Comment } = require('../../models');
 
 //get all literals
 router.get('/', (req, res) => {
     Literal.findAll({
-        attributes: ['id', 'title', 'keywords', 'article', 'createdAt',
-            [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
         order: [[ 'createdAt', 'DESC' ]],
-        include: [{ model: Reader, attributes: ['user']}]
+        attributes: ['id', 'title', 'image', 'keywords', 'article', 'createdAt',
+            [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
+        include: [{ 
+                    model: Comment, 
+                    attributes: ['id', 'text', 'readerKey', 'literalKey', 'createdAt'],
+                    include: { model: Reader, attributes: ['user']}
+                },
+                { model: Reader, attributes: ['user'] }
+                ]
         })
     .then(data => res.json(data))
     .catch(err => { console.log(err); res.status(500).json(err) });
@@ -18,9 +24,12 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Literal.findOne({ 
         where: { id: req.params.id },
-        attributes: ['id', 'title', 'keywords', 'article', 'createdAt',
+        attributes: ['id', 'title', 'image', 'keywords', 'article', 'createdAt',
             [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
-        include: [{ model: Reader, attributes: ['user']}]    
+        include: [
+            { model: Comment, attributes: ['id', 'text', 'createdAt',], include: { model: Literal, attributes: ['title'] }},
+            { model: Reader, attributes: ['user']}
+        ]    
     })
     .then(data => {
         if (!data) {
@@ -36,6 +45,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     Literal.create({
         title: req.body.title,
+        image: req.body.image,
         keywords: req.body.keywords,
         article: req.body.article,
         readerKey: req.body.readerKey
@@ -62,7 +72,20 @@ router.put('/title/:id', (req, res) => {
     Literal.update({ title: req.body.title, }, { where: { id: req.body.id }})
     .then(data => {
         if (!data) {
-            res.status(404).json({ message: 'no such literal '});
+            res.status(404).json({ message: 'no such literal' });
+            return;
+        }
+        res.json(data);
+    })
+    .catch(err => { console.log(err); res.status(500).json(err); });
+});
+
+//update a literal image
+router.put('/title/:id', (req, res) => {
+    Literal.update({ image: req.body.image, }, { where: { id: req.body.id }})
+    .then(data => {
+        if (!data) {
+            res.status(404).json({ message: 'no such literal' });
             return;
         }
         res.json(data);
@@ -75,7 +98,7 @@ router.put('/keyword/:id', (req, res) => {
     Literal.update({ keywords: req.body.keywords, }, { where: { id: req.body.id }})
     .then(data => {
         if (!data) {
-            res.status(404).json({ message: 'no such literal '});
+            res.status(404).json({ message: 'no such literal' });
             return;
         }
         res.json(data);
@@ -88,7 +111,7 @@ router.put('/article/:id', (req, res) => {
     Literal.update({ article: req.body.article, }, { where: { id: req.body.id }})
     .then(data => {
         if (!data) {
-            res.status(404).json({ message: 'no such literal '});
+            res.status(404).json({ message: 'no such literal' });
             return;
         }
         res.json(data);
