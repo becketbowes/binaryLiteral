@@ -1,12 +1,14 @@
+const sequelize = require('../connection');
 const router = require('express').Router();
-const { Reader, Literal } = require('../../models');
+const { Reader, Literal, Neat } = require('../../models');
 
 //get all literals
 router.get('/', (req, res) => {
     Literal.findAll({
-        attributes: ['id', 'title', 'keywords', 'article', 'createdAt'],
+        attributes: ['id', 'title', 'keywords', 'article', 'createdAt',
+            [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
         order: [[ 'createdAt', 'DESC' ]],
-        include: [{ model: Reader, attributes: ['user']}];
+        include: [{ model: Reader, attributes: ['user']}]
         })
     .then(data => res.json(data))
     .catch(err => { console.log(err); res.status(500).json(err) });
@@ -16,7 +18,8 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Literal.findOne({ 
         where: { id: req.params.id },
-        attributes: ['id', 'title', 'keywords', 'article'],
+        attributes: ['id', 'title', 'keywords', 'article', 'createdAt',
+            [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
         include: [{ model: Reader, attributes: ['user']}]    
     })
     .then(data => {
@@ -39,6 +42,19 @@ router.post('/', (req, res) => {
     })
     .then(data => res.json(data))
     .catch(err => { console.log(err); res.status(500).json(err); });
+});
+
+//post an upvote for a literal
+router.put('/neat', (req, res) => {
+    Neat.create({ readerKey: req.body.readerKey, literalKey: req.body.literalKey })
+    .then(() => {
+        return Literal.findOne({ where: { id: req.body.literalKey },
+                attributes: [ 'id', 'title', 'keywords', 'article', 'createdAt', 
+                    [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]]
+        })
+    })
+    .then(data => res.json(data))
+    .catch(err => res.json(err));
 });
 
 //update a literal title
@@ -80,6 +96,7 @@ router.put('/article/:id', (req, res) => {
     .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
+//delete an article by id
 router.delete('/:id', (req, res) => {
     Literal.destroy({ where: { id: req.params.id }})
     .then(data => {

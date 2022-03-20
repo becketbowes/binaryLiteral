@@ -1,7 +1,7 @@
 const router = require ('express').Router();
 const res = require('express/lib/response');
 //gets sequelize-created objects through index file in models folder
-const { Reader } = require('../../models');
+const { Reader, Literal, Neat } = require('../../models');
 
 //CRUD routes for reader object
 router.get('/', (req, res) => {
@@ -11,7 +11,13 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    Reader.findOne({ where: { id: req.params.id } })
+    Reader.findOne({ 
+        where: { id: req.params.id },
+        include: [
+            { model: Literal, attributes: [ 'id', 'title', 'keywords', 'article', 'createdAt' ]},
+            { model: Literal, attributes: ['title'], through: Neat, as: 'ohNeat' }
+        ]
+    })
     .then(data => {
         if (!data) {
             res.status(404).json({ message: 'file not found' });
