@@ -44,6 +44,12 @@ input {
     width: 100%;
 }
 
+select {
+    border: none;
+    width: 100%;
+    margin-top: 10px;
+}
+
 main {
     margin-top: 80px;
     margin-left: 15%;

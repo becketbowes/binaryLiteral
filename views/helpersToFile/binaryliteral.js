@@ -10,4 +10,4 @@ const binaryLiteral = function(text) {
     return binaryText;
 };
 
-module.exports = binaryLiteral; 
+// module.exports = binaryLiteral; 
