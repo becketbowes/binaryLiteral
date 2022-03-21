@@ -14,11 +14,20 @@
     <header>
         <h1>binary literal</h1>
         <img src="/assets/img/xbinaryStringLiteralWhite.png" alt="">
+        {{!-- {{#if Reader}} --}}
         <nav>
-            <button><img src="/assets/img/ccHomeWhite.png" alt="home"></button>
+            <button><a href="/"><img src="/assets/img/ccHomeWhite.png" alt="home"></a></button>
             <button><img src="/assets/img/ccUploadWhite.png" alt="upload"></button>
-            <button><img src="/assets/img/ccLoginWhite.png" alt="login"></button>
+            <button><a href="/login"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
         </nav>
+        {{!-- {{/if}}
+        {{#else}}
+        <nav>
+            <button><a href="/signup"><img src="/assets/img/ccHomeWhite.png" alt="home"></a></button>
+            <button><a href="/signup"></a><img src="/assets/img/ccUploadWhite.png" alt="upload"></a></button>
+            <button><a href="/signup"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
+        </nav>
+        {{/else}} --}}
     </header>
     <main>
         {{{ body }}}
