@@ -7,14 +7,13 @@ router.get('/', (req, res) => {
     Literal.findAll({
         order: [[ 'createdAt', 'DESC' ]],
         attributes: ['id', 'title', 'image', 'keywords', 'article', 'createdAt',
-            [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
+                [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
         include: [{ 
                     model: Comment, 
                     attributes: ['id', 'text', 'readerKey', 'literalKey', 'createdAt'],
                     include: { model: Reader, attributes: ['user']}
                 },
-                { model: Reader, attributes: ['user'] }
-                ]
+                { model: Reader, attributes: ['user'] }]
         })
     .then(data => res.json(data))
     .catch(err => { console.log(err); res.status(500).json(err) });
@@ -28,8 +27,7 @@ router.get('/:id', (req, res) => {
             [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
         include: [
             { model: Comment, attributes: ['id', 'text', 'createdAt',], include: { model: Literal, attributes: ['title'] }},
-            { model: Reader, attributes: ['user']}
-        ]    
+            { model: Reader, attributes: ['user']}]    
     })
     .then(data => {
         if (!data) {

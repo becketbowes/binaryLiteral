@@ -17,15 +17,18 @@ Literal.init(
         },
         image: {
             type: DataTypes.STRING,
-            allowNull: true,
-            validate: { isUrl: true }
+            allowNull: true
+        },
+        imageAlt: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         keywords: {
             type: DataTypes.STRING,
             allowNull: true
         },
         article: {
-            type: DataTypes.STRING,
+            type: DataTypes.TEXT,
             allowNull: false
         },
         readerKey: {

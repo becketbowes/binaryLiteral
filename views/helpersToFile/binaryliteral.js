@@ -1,14 +1,13 @@
-// module.export = {
-//     binaryLiteral: 
-// }
-
-const text = "i've seen starbeams on the shoulder of Onprion"
+// const text = 'This is the least functional function that i have ever seen.';
 
 const binaryLiteral = function(text) {
-    text = text.split()
-    text.forEach(element.charCodeAt.toString(2));
-    console.log(text);
-    return text;
+    text = text.split('')
+    const binaryArray = []
+    text.forEach(function (element){
+        binaryArray.push(element.charCodeAt(0).toString(2));
+    });
+    const binaryText = binaryArray.toString().split(',').join(' ');
+    return binaryText;
 };
 
-console.log(binaryLiteral(text));
+module.exports = binaryLiteral; 
