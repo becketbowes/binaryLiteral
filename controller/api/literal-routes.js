@@ -54,15 +54,17 @@ router.post('/', (req, res) => {
 
 //post an upvote for a literal
 router.put('/neat', (req, res) => {
-    Neat.create({ readerKey: req.body.readerKey, literalKey: req.body.literalKey })
-    .then(() => {
-        return Literal.findOne({ where: { id: req.body.literalKey },
-                attributes: [ 'id', 'title', 'keywords', 'article', 'createdAt', 
-                    [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]]
+    if (req.session) {
+        Neat.create({ ...req.body, user: req.session.user}, { Neat, Comment, Reader })
+        .then(() => {
+            return Literal.findOne({ where: { id: req.body.literalKey },
+                    attributes: [ 'id', 'title', 'keywords', 'article', 'createdAt', 
+                        [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]]
+            })
         })
-    })
-    .then(data => res.json(data))
-    .catch(err => res.json(err));
+        .then(data => res.json(data))
+        .catch(err => res.json(err));
+    }
 });
 
 //update a literal title

@@ -1,0 +1,31 @@
+<article>
+    {{#if literal.image}}
+    <img src="./assets/img/{{literal.image}}" alt="{{literal.imageAlt}}">
+    {{/if}}
+    <h3>{{literal.title}}</h3>
+    <h4>created by {{reader.user}} at: {{literal.createdAt}}, keywords: {{literal.keywords}}</h4>
+    <section>{{literal.article}}</section>
+    <h4><a><button type="button" class="neatasabutton"> -> Neat! </button></a> {{literal.ohNeat}} people thought this was neat.</h4>
+    <div>
+        {{#each literal.comments}}
+        <section>
+            <div>
+                <h4>noted by {{reader.user}} on {{createdAt}}</h4>
+            </div>
+            <div>
+                {{text}}
+            </div>
+        </section>
+        {{/each}}
+    </div>
+    <div>
+        <div>
+            <textarea name="newcomment" id="comment-text"></textarea>
+        </div>
+        <div>
+            <button class="comment">post a comment -></button>
+        </div>
+    </div>
+</article>
+<script src="/assets/script/neat.js"></script>
+<script src="/assets/script/comment.js"></script>
