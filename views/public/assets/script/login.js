@@ -5,6 +5,7 @@ async function loginCall(event) {
     const thepass = document.querySelector('#pass').value.trim();
     const thelanguage = document.querySelector('#language').value;
     const thetheme = document.querySelector('#theme').value;
+    console.log(theemail, thepass, thelanguage, thetheme);
 
     if (theemail && thepass) {
         const response = await fetch('/api/readers/login', {
@@ -18,7 +19,22 @@ async function loginCall(event) {
             alert(response.statusText);
         }
     }
-}
+
+    // const id = req.session.id
+
+    // if (thelanguage && thetheme && id) {
+    //     const res = await fetch(`/api/readers/${id}`, {
+    //         method: 'put',
+    //         body: JSON.stringify({ binary: thelanguage, blackpage: thetheme }),
+    //         headers: { 'Content-Type': 'application/json' }
+    //     })
+    //     if (res.ok) {
+    //         console.log('success');
+    //     } else {
+    //         alert(response.statusText);
+    //     }
+    // }
+};
 
 document.querySelector('.login').addEventListener('submit', loginCall);
 

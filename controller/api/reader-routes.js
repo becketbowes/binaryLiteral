@@ -68,13 +68,18 @@ router.post('/login', (req, res) => {
             req.session.save(() => {
                 req.session.readerid = data.id;
                 req.session.user = data.user;
-                req.session.binary = data.binary;
-                req.session.blackpage = data.blackpage;
-                req.session.writer = data.writer;
                 req.session.login = true;
             });
             res.json({ reader: data, message: 'logged in' });
-        });
+        })
+        .catch(err => { console.log(err); res.status(500).json(err)})
+});
+
+router.post('/logout', (req, res) => {
+    if (req.session.loggedIn) {
+        req.session.destroy(() => { res.status(204).end() });
+    }
+    else { res.status(404).end(); }
 });
 
 router.put('/:id', (req, res) => {
