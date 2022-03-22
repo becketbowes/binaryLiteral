@@ -52,6 +52,7 @@ router.post('/', (req, res) => {
         .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
+//note that this creates a session with the reader
 router.post('/login', (req, res) => {
     Reader.findOne({ where: { email: req.body.email } })
         .then(data => {

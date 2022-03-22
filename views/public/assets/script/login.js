@@ -9,7 +9,7 @@ async function loginCall(event) {
 
     if (theemail && thepass) {
         const response = await fetch('/api/readers/login', {
-            method: 'post',
+            method: 'POST',
             body: JSON.stringify({ email: theemail, pass: thepass }),
             headers: { 'Content-Type': 'application/json' }
         })

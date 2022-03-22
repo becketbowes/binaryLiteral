@@ -10,7 +10,7 @@
         {{#each literal.comments}}
         <section>
             <div>
-                <h4>noted by {{reader.user}} on {{createdAt}}</h4>
+                <h4>noted by {{comment.user}} on {{createdAt}}</h4>
             </div>
             <div>
                 {{text}}
@@ -18,14 +18,14 @@
         </section>
         {{/each}}
     </div>
-    <div>
+    <form class="commentment">
         <div>
             <textarea name="newcomment" id="comment-text"></textarea>
         </div>
         <div>
-            <button class="comment">post a comment -></button>
+            <button type="submit">post a comment -></button>
         </div>
-    </div>
+    </form>
 </article>
 <script src="/assets/script/neat.js"></script>
 <script src="/assets/script/comment.js"></script>
