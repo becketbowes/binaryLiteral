@@ -1,5 +1,6 @@
 const sequelize = require('./connection');
 const { Literal, Reader, Comment } = require('../models');
+const res = require('express/lib/response');
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
@@ -30,7 +31,8 @@ router.get('/literal/:id', (req, res) => {
     .then(data => { 
         if (!data) { res.status(404).json({ message: 'no such post' }); return; }
         const literal = data.get({ plain: true });
-        res.render('literal', { literal });
+        console.log(literal);
+        res.render('literal', { literal, loggedIn: req.session.loggedin });
     })
     .catch(err => { console.log(err); res.status(500).json(err); });
 });

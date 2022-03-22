@@ -39,12 +39,12 @@ router.post('/', (req, res) => {
     })
         .then(data => {
             req.session.save(() => {
-                req.session.id = data.id;
+                req.session.readerId = data.id;
                 req.session.user = data.user;
                 req.session.binary = data.binary;
                 req.session.blackpage = data.blackpage;
                 req.session.writer = data.writer;
-                req.session.login = true;
+                req.session.loggedin = true;
 
                 res.json(data);
             })
@@ -69,7 +69,10 @@ router.post('/login', (req, res) => {
             req.session.save(() => {
                 req.session.readerid = data.id;
                 req.session.user = data.user;
-                req.session.login = true;
+                req.session.binary = data.binary;
+                req.session.blackpage = data.blackpage;
+                req.session.writer = data.writer;
+                req.session.loggedin = true;
             });
             res.json({ reader: data, message: 'logged in' });
         })

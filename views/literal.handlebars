@@ -6,18 +6,21 @@
     <h4>created by {{reader.user}} at: {{literal.createdAt}}, keywords: {{literal.keywords}}</h4>
     <section>{{literal.article}}</section>
     <h4><a><button type="button" class="neatasabutton"> -> Neat! </button></a> {{literal.ohNeat}} people thought this was neat.</h4>
+    ======
     <div>
         {{#each literal.comments}}
         <section>
             <div>
-                <h4>noted by {{comment.user}} on {{createdAt}}</h4>
+                <h4>noted by {{commentauthor}} on {{createdAt}}:</h4>
             </div>
             <div>
                 {{text}}
             </div>
+            =====
         </section>
         {{/each}}
     </div>
+    {{#if loggedIn}}
     <form class="commentment">
         <div>
             <textarea name="newcomment" id="comment-text"></textarea>
@@ -26,6 +29,7 @@
             <button type="submit">post a comment -></button>
         </div>
     </form>
+    {{/if}}
 </article>
 <script src="/assets/script/neat.js"></script>
 <script src="/assets/script/comment.js"></script>
