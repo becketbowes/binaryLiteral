@@ -14,8 +14,9 @@ router.get('/', (req, res) => {
                 { model: Reader, attributes: ['user']}]    
         })
     .then(data => { 
-        const article = data.map(article => article.get({ plain: true }));
-        res.render('home', { article }); 
+        //render the homepage using the findAll from the data base and including session variables
+        const articles = data.map(article => article.get({ plain: true }));
+        res.render('home', { articles, loggedin: req.session.loggedin, blackpage: req.session.blackpage, binary: req.session.binary }); 
     })
     .catch(err => { console.log(err); res.status(500).json(err); });
 });
@@ -32,12 +33,9 @@ router.get('/literal/:id', (req, res) => {
         })
     .then(data => { 
         if (!data) { res.status(404).json({ message: 'no such post' }); return; }
+        //create single literal page returning database info and session variables
         const literal = data.get({ plain: true });
-        const userValue = req.session.user;
-        console.log('this is literal:', literal);
-        console.log('this is loggedinuserValue:', userValue);
-        ////THIS
-        res.render('literal', { literal, loggedin: req.session.loggedin });
+        res.render('literal', { literal, loggedin: req.session.loggedin, blackpage: req.session.blackpage, binary: req.session.binary });
     })
     .catch(err => { console.log(err); res.status(500).json(err); });
 });

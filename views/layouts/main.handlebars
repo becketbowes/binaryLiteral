@@ -7,29 +7,38 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;500&display=swap" rel="stylesheet">
+    {{#if blackpage}}
     <link rel="stylesheet" href="/assets/style/styleblack.css">
+    {{else}}
+    <link rel="stylesheet" href="/assets/style/stylewhite.css">
+    {{/if}}
     <title>binary literal</title>
 </head>
 <body>
     <header>
         <h1>binary literal</h1>
+        {{#if blackpage}}
         <img src="/assets/img/xbinaryStringLiteralWhite.png" alt="">
-        {{!-- {{#if Reader}} --}}
+        {{else}}
+        <img src="/assets/img/xbinaryStringLiteralBlack.png" alt="">
+        {{/if}}
+
+
+        {{#if loggedin}}
         <nav>
-            <button id="home"><a href="/"><img src="/assets/img/ccHomeWhite.png" alt="home"></a></button>
+            <button id="home"><a href="/"><img src="/assets/img/ccHomeBlack.png" alt="home"><img src="/assets/img/ccHomeWhite.png" alt="home"></a></button>
             <button id="write"><img src="/assets/img/ccUploadWhite.png" alt="upload"></button>
             <button id="logout"><img src="/assets/img/ccLogoutWhite.png" alt="logout"></button>
         </nav>
         <script src="/assets/script/logout.js"></script>
-        {{!-- {{/if}}
-        {{#else}}
+        {{else}}
         <nav>
             <button><a href="/signup"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
             <button><a href="/signup"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
             <button><a href="/signup"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
         </nav>
         <script src="/assets/script/login.js"></script> 
-        {{/else}} --}}
+        {{/if}}
     </header>
     <main>
         {{{ body }}}
