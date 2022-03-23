@@ -1,10 +1,12 @@
 async function commentCall(event) {
     event.preventDefault();
 
+    //get text from comment field
     const commentment = document.querySelector('textarea[name=newcomment]').value.trim();
+    //finds literal id from window:
     const literalKey = window.location.toString().split('/')[ window.location.toString().split('/').length - 1 ];
-    console.log(commentment, literalKey);
 
+    //writes comment, reloads page to show saved comment on page
     if (commentment) {
         const res = await fetch('/api/comments/', {
             method: 'POST',

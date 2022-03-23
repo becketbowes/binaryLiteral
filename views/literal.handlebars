@@ -1,6 +1,6 @@
 <article>
     {{#if literal.image}}
-    <img src="./assets/img/{{literal.image}}" alt="{{literal.imageAlt}}">
+    <img src="/assets/img/{{literal.image}}" alt="{{literal.imageAlt}}">
     {{/if}}
     <h3>{{literal.title}}</h3>
     <h4>created by {{reader.user}} at: {{literal.createdAt}}, keywords: {{literal.keywords}}</h4>
@@ -20,7 +20,7 @@
         </section>
         {{/each}}
     </div>
-    {{#if loggedIn}}
+    {{#if loggedin}}
     <form class="commentment">
         <div>
             <textarea name="newcomment" id="comment-text"></textarea>
@@ -31,5 +31,7 @@
     </form>
     {{/if}}
 </article>
+{{#if loggedin}}
 <script src="/assets/script/neat.js"></script>
 <script src="/assets/script/comment.js"></script>
+{{/if}}

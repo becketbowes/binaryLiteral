@@ -3,6 +3,7 @@ const { Literal, Reader, Comment } = require('../models');
 const res = require('express/lib/response');
 const router = require('express').Router();
 
+//request to get all articles and render homepage
 router.get('/', (req, res) => {
     Literal.findAll({
         order: [[ 'createdAt', 'DESC' ]],
@@ -19,6 +20,7 @@ router.get('/', (req, res) => {
     .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
+//request called by comment button to get one article and render page, conditionally rendering comment writing section if reader is logged in
 router.get('/literal/:id', (req, res) => {
     Literal.findOne({
         where: { id: req.params.id },
@@ -31,16 +33,21 @@ router.get('/literal/:id', (req, res) => {
     .then(data => { 
         if (!data) { res.status(404).json({ message: 'no such post' }); return; }
         const literal = data.get({ plain: true });
-        console.log(literal);
-        res.render('literal', { literal, loggedIn: req.session.loggedin });
+        const userValue = req.session.user;
+        console.log('this is literal:', literal);
+        console.log('this is loggedinuserValue:', userValue);
+        ////THIS
+        res.render('literal', { literal, loggedin: req.session.loggedin });
     })
     .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
+//request to render signup page(no data needed)
 router.get('/signup', (req, res) => {
     res.render('signup');
 })
 
+//request to render login page(no data needed)
 router.get('/login', (req, res) => {
     res.render('login');
 });

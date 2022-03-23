@@ -27,8 +27,9 @@ router.get('/:id', (req, res) => {
         .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
+//request to create reader, initiate 'loggedin' session with cookie
 router.post('/', (req, res) => {
-    //expects: {username: Namey McNamerson, password: 1234, email: im@aol.com, writer: true, binary: false, blackpage: true}
+    //expects: {username: Namey McNamerson, password: 1234, email: im@aol.com & not necessarily writer: true, binary: false, blackpage: true}
     Reader.create({
         user: req.body.user,
         email: req.body.email,
@@ -52,7 +53,7 @@ router.post('/', (req, res) => {
         .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
-//note that this creates a session with the reader
+//verifies reader with email identifier, password verification (via bcrypt), starts cookie session(via express-session)
 router.post('/login', (req, res) => {
     Reader.findOne({ where: { email: req.body.email } })
         .then(data => {
@@ -60,12 +61,13 @@ router.post('/login', (req, res) => {
                 res.status(400).json({ message: 'no such thing' });
                 return;
             }
-            //verify
+            //verify password
             const valid = data.checkPass(req.body.pass);
             if (!valid) {
                 res.status(400).json({ message: 'not the password' });
                 return;
             }
+            //start a session with a cookie
             req.session.save(() => {
                 req.session.readerid = data.id;
                 req.session.user = data.user;
@@ -73,14 +75,15 @@ router.post('/login', (req, res) => {
                 req.session.blackpage = data.blackpage;
                 req.session.writer = data.writer;
                 req.session.loggedin = true;
+
+                res.json({ reader: data, message: 'logged in' });
             });
-            res.json({ reader: data, message: 'logged in' });
-        })
-        .catch(err => { console.log(err); res.status(500).json(err)})
+        });
 });
 
+//verfies reader is logged in, logs them out.
 router.post('/logout', (req, res) => {
-    if (req.session.loggedIn) {
+    if (req.session.loggedin) {
         req.session.destroy(() => { res.status(204).end() });
     }
     else { res.status(404).end(); }
