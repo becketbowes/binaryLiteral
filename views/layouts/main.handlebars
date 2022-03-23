@@ -22,22 +22,18 @@
         {{else}}
         <img src="/assets/img/xbinaryStringLiteralBlack.png" alt="">
         {{/if}}
-
-
         {{#if loggedin}}
         <nav>
-            <button id="home"><a href="/"><img src="/assets/img/ccHomeBlack.png" alt="home"><img src="/assets/img/ccHomeWhite.png" alt="home"></a></button>
-            <button id="write"><img src="/assets/img/ccUploadWhite.png" alt="upload"></button>
-            <button id="logout"><img src="/assets/img/ccLogoutWhite.png" alt="logout"></button>
+            <button id="home"><a href="/"><img src="/assets/img/ccHomeBlack.png" alt="home"></a></button>
+            <button id="write"><img src="/assets/img/ccUploadBlack.png" alt="upload"></button>
+            <button id="logout"><img src="/assets/img/ccLogoutBlack.png" alt="logout"></button>
         </nav>
-        <script src="/assets/script/logout.js"></script>
         {{else}}
         <nav>
             <button><a href="/signup"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
             <button><a href="/signup"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
             <button><a href="/signup"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
         </nav>
-        <script src="/assets/script/login.js"></script> 
         {{/if}}
     </header>
     <main>
@@ -46,5 +42,10 @@
     <footer>
         common use licence, codeclast date
     </footer>
+    {{#if loggedin}}
+    <script src="/assets/script/logout.js"></script>
+    {{else}}
+    <script src="/assets/script/login.js"></script> 
+    {{/if}}
 </body>
 </html>
