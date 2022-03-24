@@ -43,10 +43,11 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     Literal.create({
         title: req.body.title,
-        image: req.body.image,
-        keywords: req.body.keywords,
-        article: req.body.article,
-        readerKey: req.body.readerKey
+        image: req.body.img,
+        imageAlt: req.body.imgalt,
+        keywords: req.body.keyword,
+        article: req.body.art,
+        readerKey: req.session.readerId
     })
     .then(data => res.json(data))
     .catch(err => { console.log(err); res.status(500).json(err); });

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,27 +13,28 @@
     {{else}}
     <link rel="stylesheet" href="/assets/style/stylewhite.css">
     {{/if}}
-    <title>binary literal</title>
+    <title>{{"binary literal"}}</title>
 </head>
+
 <body>
     <header>
         <h1>binary literal</h1>
         {{#if blackpage}}
-        <img src="/assets/img/xbinaryStringLiteralWhite.png" alt="">
+        <img src="/assets/img/xbinaryStringLiteralWhite.png" alt="binary linear element">
         {{else}}
-        <img src="/assets/img/xbinaryStringLiteralBlack.png" alt="">
+        <img src="/assets/img/xbinaryStringLiteralBlack.png" alt="binary linear element">
         {{/if}}
         {{#if loggedin}}
         <nav>
-            <button id="home"><a href="/"><img src="/assets/img/ccHomeBlack.png" alt="home"></a></button>
-            <button id="write"><img src="/assets/img/ccUploadBlack.png" alt="upload"></button>
-            <button id="logout"><img src="/assets/img/ccLogoutBlack.png" alt="logout"></button>
+            <button id="home"><a href="/"><img src="/assets/img/ccHomeGrey.png" alt="home"></a></button>
+            <button id="write"><a href="/write"><img src="/assets/img/ccUploadGrey.png" alt="upload"></a></button>
+            <button id="logout"><a href="/login"><img src="/assets/img/ccLogoutGrey.png" alt="logout"></a></button>
         </nav>
         {{else}}
         <nav>
-            <button><a href="/signup"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
-            <button><a href="/signup"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
-            <button><a href="/signup"><img src="/assets/img/ccLoginWhite.png" alt="login"></a></button>
+            <button id="home"><a href="/login"><img src="/assets/img/ccHomeGrey.png" alt="home"></a></button>
+            <button id="write"><a href="/login"><img src="/assets/img/ccUploadGrey.png" alt="upload"></a></button>
+            <button id="logout"><a href="/login"><img src="/assets/img/ccLoginGrey.png" alt="logout"></a></button>
         </nav>
         {{/if}}
     </header>
@@ -40,12 +42,13 @@
         {{{ body }}}
     </main>
     <footer>
-        common use licence, codeclast date
+        common use licence {{getYear}}, codeclast
     </footer>
     {{#if loggedin}}
     <script src="/assets/script/logout.js"></script>
     {{else}}
-    <script src="/assets/script/login.js"></script> 
+    <script src="/assets/script/login.js"></script>
     {{/if}}
 </body>
+
 </html>

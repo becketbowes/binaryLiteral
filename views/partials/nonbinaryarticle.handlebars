@@ -1,15 +1,9 @@
-<div>
 <article>
     {{#each articles}}
-    <img src="/assets/img/{{image}}" alt="{{alt}}">
+    <img src="/assets/img/{{image}}" alt="{{binaryLiteral alt}}">
     <h3>{{title}}</h3>
     <h4>Written by {{reader.user}} at: {{createdAt}}, keywords: {{keywords}}</h4>
     <section>{{article}}</section>
     <h4><a><button type="button" class="neatasabutton">Neat!</button></a> {{ohNeat}} people thought this was neat. <a><button type="button" class="literalpage"> {{comments.length}} more comments:</button></a></h4>
     {{/each}}
 </article>
-</div>
-{{#if loggedin}}
-<script src="/assets/script/neat.js"></script>
-<script src="/assets/script/literal.js"></script>
-{{/if}}

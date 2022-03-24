@@ -14,35 +14,11 @@ async function loginCall(event) {
             headers: { 'Content-Type': 'application/json' }
         })
         if (response.ok) {
-            console.log('success');
+            document.location.replace('/');
         } else {
             alert(response.statusText);
         }
     }
-
-    // const id = req.session.id
-
-    // if (thelanguage && thetheme && id) {
-    //     const res = await fetch(`/api/readers/${id}`, {
-    //         method: 'put',
-    //         body: JSON.stringify({ binary: thelanguage, blackpage: thetheme }),
-    //         headers: { 'Content-Type': 'application/json' }
-    //     })
-    //     if (res.ok) {
-    //         console.log('success');
-    //     } else {
-    //         alert(response.statusText);
-    //     }
-    // }
 };
 
 document.querySelector('.login').addEventListener('submit', loginCall);
-
-
-                  // let id = data.id
-            // fetch(`/api/readers/${id}`, {
-            //     method: 'put',
-            //     body: JSON.stringify({ binary: thelanguage, blackpage: thetheme }),
-            // })
-            // .then((data) => console.log(data))
-            // .catch(err => { console.log(err); res.status(500).json(err); }) 
