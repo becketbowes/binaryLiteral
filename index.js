@@ -5,6 +5,7 @@ const helpers = require('./views/utils/helpers');
 const exphbs = require('express-handlebars');
 const hbs = exphbs.create({ helpers });
 const session = require('express-session');
+require('dotenv').config();
 
 
 const app = express();
@@ -13,7 +14,7 @@ const PORT = process.env.PORT || 3311;
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const sess = {
-    secret: 'ifYouTellEveryoneItsNotASecretHarold',
+    secret: process.env.SESH,
     cookie: {},
     resave: false,
     saveUninitialized: true,
