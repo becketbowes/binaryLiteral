@@ -5,7 +5,7 @@ async function neatCall(event) {
     
     const res = await fetch('/api/literals/neat', {
         method: 'PUT',
-        body: JSON.stringify({ literalKey: id }),
+        body: JSON.stringify({ literalkey: id }),
         headers: { 'Content-Type': 'application/json' }
     });
     if (res.ok) {

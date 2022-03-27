@@ -3,7 +3,7 @@ const { Comment, Reader } = require('../../models');
 
 router.get('/:id', (req, res) => {
     Comment.getAll({
-        where: { id: literalKey },
+        where: { id: literalkey },
         attributes: ['id', 'text'],
         include: [{ model: Reader, attributes: ['user'] }]
     })
@@ -11,13 +11,13 @@ router.get('/:id', (req, res) => {
     .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
-//note that readerkey comes from session, text and literalKey come from front end fetch call
+//note that readerkey comes from session, text and literalkey come from front end fetch call
 router.post('/', (req, res) => {
     if (req.session) {
         Comment.create({
             text: req.body.commenttext,
-            literalKey: req.body.literalKey,
-            readerkey: req.session.readerid
+            literalKey: req.body.literalkey,
+            readerkey: req.session.readerkey
         })
         .then(data => res.json(data))
         .catch(err => { console.log(err); res.status(400).json(err); });

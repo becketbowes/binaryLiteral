@@ -4,17 +4,17 @@ const Neat = require('./Neat');
 const Comment = require('./Comment');
 
 //define relationships
-Reader.hasMany(Literal, { foreignKey: 'readerKey' });
-Reader.belongsToMany(Literal, { through: Neat, as: 'ohNeat', foreignKey: 'readerKey' });
-Reader.hasMany(Neat, { foreignKey: 'readerKey' });
-Reader.hasMany(Comment, { foreignKey: 'readerKey' });
-Literal.belongsTo(Reader, { foreignKey: 'readerKey' });
+Reader.hasMany(Literal, { foreignKey: 'readerkey' });
+Reader.belongsToMany(Literal, { through: Neat, as: 'ohNeat', foreignKey: 'readerkey' });
+Reader.hasMany(Neat, { foreignKey: 'readerkey' });
+Reader.hasMany(Comment, { foreignKey: 'readerkey' });
+Literal.belongsTo(Reader, { foreignKey: 'readerkey' });
 Literal.belongsToMany(Reader, { through: Neat, as: 'ohNeat', foreignKey: 'literalKey' });
 Literal.hasMany(Neat, { foreignKey: 'literalKey' });
 Literal.hasMany(Comment, { foreignKey: 'literalKey'});
-Neat.belongsTo(Reader, { foreignKey: 'readerKey' });
+Neat.belongsTo(Reader, { foreignKey: 'readerkey' });
 Neat.belongsTo(Literal, { foreignKey: 'literalKey' });
-Comment.belongsTo(Reader, { foreignKey: 'readerKey' });
+Comment.belongsTo(Reader, { foreignKey: 'readerkey' });
 Comment.belongsTo(Literal, { foreignKey: 'literalKey' });
 
 module.exports = { Reader, Literal, Neat, Comment };

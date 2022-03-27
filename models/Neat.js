@@ -10,7 +10,7 @@ Neat.init(
             primaryKey: true,
             autoIncrement: true
         },
-        readerKey: {
+        readerkey: {
             type: DataTypes.INTEGER,
             references: { model: 'reader', key: 'id' }
         },

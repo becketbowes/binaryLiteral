@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
     Literal.findAll({
         order: [[ 'createdAt', 'DESC' ]],
         attributes: ['id', 'title', 'image', 'imageAlt', 'keywords', 'article', 'createdAt',
-                [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
+                [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalkey)'), 'ohNeat' ]],
         include: [
                 { model: Comment, attributes: ['id', 'text', 'createdAt',], include: { model: Literal, attributes: ['title'] }},
                 { model: Reader, attributes: ['user']}]    
@@ -26,7 +26,7 @@ router.get('/literal/:id', (req, res) => {
     Literal.findOne({
         where: { id: req.params.id },
         attributes: ['id', 'title', 'image', 'imageAlt', 'keywords', 'article', 'createdAt',
-                [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
+                [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalkey)'), 'ohNeat' ]],
         include: [
                 { model: Comment, attributes: ['id', 'text', 'createdAt',], include: { model: Literal, attributes: ['title'] }},
                 { model: Reader, attributes: ['user']}]    

@@ -7,12 +7,12 @@ router.get('/', (req, res) => {
     console.log('write page router.get', req.session.readerid);
     Literal.findAll({
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        where: { readerkey: req.session.readerid },
+        where: { readerkey: req.session.readerkey },
         attributes: [ 'id', 'title', 'image', 'imageAlt', 'keywords', 'article', 'createdAt',
-                [sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'neato']],
+                [sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalkey)'), 'neato']],
         include: [{ 
             model: Comment, 
-            attributes: [ 'id', 'text', 'literalKey', 'readerkey', 'createdAt' ],
+            attributes: [ 'id', 'text', 'literalkey', 'readerkey', 'createdAt' ],
             include: { model: Reader, attributes: ['user']}
         },
         { model: Reader, attributes: ['user'] }]

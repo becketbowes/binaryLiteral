@@ -1,3 +1,5 @@
+//called from write.handlebars onclick this sends form information to api to create a literal
+
 async function writeCall(event) {
     event.preventDefault();
 

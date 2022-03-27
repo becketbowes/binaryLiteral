@@ -7,10 +7,10 @@ router.get('/', (req, res) => {
     Literal.findAll({
         order: [[ 'createdAt', 'DESC' ]],
         attributes: ['id', 'title', 'image', 'keywords', 'article', 'createdAt',
-                [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
+                [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalkey)'), 'ohNeat' ]],
         include: [{ 
                     model: Comment, 
-                    attributes: ['id', 'text', 'readerkey', 'literalKey', 'createdAt'],
+                    attributes: ['id', 'text', 'readerkey', 'literalkey', 'createdAt'],
                     include: { model: Reader, attributes: ['user']}
                 },
                 { model: Reader, attributes: ['user'] }]
@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
     Literal.findOne({ 
         where: { id: req.params.id },
         attributes: ['id', 'title', 'image', 'keywords', 'article', 'createdAt',
-            [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
+            [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalkey)'), 'ohNeat' ]],
         include: [
             { model: Comment, attributes: ['id', 'text', 'createdAt',], include: { model: Literal, attributes: ['title'] }},
             { model: Reader, attributes: ['user']}]    
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
         imageAlt: req.body.imageAlt,
         keywords: req.body.keyword,
         article: req.body.article,
-        readerkey: req.session.readerId
+        readerkey: req.session.readerkey
     })
     .then(data => res.json(data))
     .catch(err => { console.log(err); res.status(500).json(err); });
@@ -58,9 +58,9 @@ router.put('/neat', (req, res) => {
     if (req.session) {
         Neat.create({ ...req.body, user: req.session.user}, { Neat, Comment, Reader })
         .then(() => {
-            return Literal.findOne({ where: { id: req.body.literalKey },
+            return Literal.findOne({ where: { id: req.body.literalkey },
                     attributes: [ 'id', 'title', 'keywords', 'article', 'createdAt', 
-                        [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]]
+                        [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalkey)'), 'ohNeat' ]]
             })
         })
         .then(data => res.json(data))

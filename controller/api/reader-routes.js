@@ -40,7 +40,7 @@ router.post('/', (req, res) => {
     })
         .then(data => {
             req.session.save(() => {
-                req.session.readerId = data.id;
+                req.session.readerkey = data.id;
                 req.session.user = data.user;
                 req.session.binary = data.binary;
                 req.session.blackpage = data.blackpage;

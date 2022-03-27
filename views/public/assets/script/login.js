@@ -3,9 +3,8 @@ async function loginCall(event) {
 
     const theemail = document.querySelector('#email').value.trim();
     const thepass = document.querySelector('#pass').value.trim();
-    const thelanguage = document.querySelector('#language').value;
+    // const thelanguage = document.querySelector('#language').value;
     const thetheme = document.querySelector('#theme').value;
-    console.log(theemail, thepass, thelanguage, thetheme);
 
     if (theemail && thepass) {
         const response = await fetch('/api/readers/login', {

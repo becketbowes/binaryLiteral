@@ -14,7 +14,7 @@ Comment.init(
             type: DataTypes.STRING,
             allowNull: false
         },
-        readerKey: {
+        readerkey: {
             type: DataTypes.INTEGER,
             references: { model: 'reader', key: 'id' }
         },
