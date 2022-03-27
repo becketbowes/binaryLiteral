@@ -15,7 +15,7 @@
   [License](README.md#license)<br>
 
   ## Installation
-  On logging in, you have the option to view the entire site in black on white, white on black, binary, or english. You are then able to contribute your own content and participate in the conversation.
+  On logging in, you have the option to view the entire site in black on white, white on black, binary, or english (the binary/english version is turned off currently for grading purposes.). You are then able to contribute your own content and participate in the conversation.
 
   ## Usage
   The website should user-intuitive.
