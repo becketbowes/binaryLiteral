@@ -2,17 +2,15 @@ async function writeCall(event) {
     event.preventDefault();
 
     const title = document.querySelector('textarea[name="title"]').value.trim();
-    const img = document.querySelector('textarea[name="imagename"]').value.trim();
-    const imgalt = document.querySelector('textarea[name="altimgtext"]').value.trim();
+    const image = document.querySelector('textarea[name="imagename"]').value.trim();
+    const imageAlt = document.querySelector('textarea[name="altimgtext"]').value.trim();
     const keyword = document.querySelector('textarea[name="keywords"]').value.trim();
-    const art = document.querySelector('textarea[name="textfield"]').value.trim();
+    const article = document.querySelector('textarea[name="textfield"]').value.trim();
 
-    console.log (title, img, imgalt, keyword, art);
-
-    if (title, img, imgalt, keyword, art) {
+    if (title, image, imageAlt, keyword, article) {
         const res = await fetch('/api/literals', {
             method: 'POST',
-            body: JSON.stringify ({ title, img, imgalt, keyword, art }),
+            body: JSON.stringify ({ title, image, imageAlt, keyword, article }),
             headers: { 'Content-Type': 'application/json' }
         })
         if (res.ok) {

@@ -1,5 +1,3 @@
-<div>
-<article>
     {{#each articles}}
     <img src="/assets/img/{{image}}" alt="{{imageAlt}}">
     <h3>{{title}}</h3>
@@ -7,7 +5,3 @@
     <section>{{article}}</section>
     <h4><a><button type="button" class="neatasabutton">Neat!</button></a> {{ohNeat}} people thought this was neat. <a href="/literal/{{id}}">{{comments.length}} more comments:</a></h4>
     {{/each}}
-</article>
-</div>
-<script src="/assets/script/neat.js"></script>
-<script src="/assets/script/literal.js"></script>

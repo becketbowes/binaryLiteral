@@ -11,13 +11,13 @@ router.get('/:id', (req, res) => {
     .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
-//note that readerKey comes from session, text and literalKey come from front end fetch call
+//note that readerkey comes from session, text and literalKey come from front end fetch call
 router.post('/', (req, res) => {
     if (req.session) {
         Comment.create({
             text: req.body.commenttext,
             literalKey: req.body.literalKey,
-            readerKey: req.session.readerid
+            readerkey: req.session.readerid
         })
         .then(data => res.json(data))
         .catch(err => { console.log(err); res.status(400).json(err); });

@@ -1,0 +1,7 @@
+    {{#each articles}}
+    <img src="/assets/img/{{image}}" alt="{{imageAlt}}">
+    <h3>{{binaryLiteral title}}</h3>
+    <h4>Written by {{binaryLiteral reader.user}} on: {{binaryLiteral createdAt}}, keywords: {{binaryLiteral keywords}}</h4>
+    <section>{{binaryLiteral article}}</section>
+    <h4><a><button type="button" class="neatasabutton">Neat!</button></a> {{binaryLiteral ohNeat}} people thought this was neat. <a href="/literal/{{id}}">{{binaryLiteral comments.length}} more comments:</a></h4>
+    {{/each}}

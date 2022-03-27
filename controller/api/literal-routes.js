@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
                 [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalKey)'), 'ohNeat' ]],
         include: [{ 
                     model: Comment, 
-                    attributes: ['id', 'text', 'readerKey', 'literalKey', 'createdAt'],
+                    attributes: ['id', 'text', 'readerkey', 'literalKey', 'createdAt'],
                     include: { model: Reader, attributes: ['user']}
                 },
                 { model: Reader, attributes: ['user'] }]
@@ -43,11 +43,11 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     Literal.create({
         title: req.body.title,
-        image: req.body.img,
-        imageAlt: req.body.imgalt,
+        image: req.body.image,
+        imageAlt: req.body.imageAlt,
         keywords: req.body.keyword,
-        article: req.body.art,
-        readerKey: req.session.readerId
+        article: req.body.article,
+        readerkey: req.session.readerId
     })
     .then(data => res.json(data))
     .catch(err => { console.log(err); res.status(500).json(err); });

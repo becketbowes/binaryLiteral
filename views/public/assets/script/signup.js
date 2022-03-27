@@ -1,13 +1,11 @@
-const res = require("express/lib/response");
-
 async function signupCall(event) {
   event.preventDefault();
 
-  const theuser = document.querySelector('#user').value.trim();
-  const theemail = document.querySelector('#email').value.trim();
-  const thepass = document.querySelector('#pass').value.trim();
-  const thelanguage = document.querySelector('#language').value;
-  const thetheme = document.querySelector('#theme').value;
+  const theuser = document.querySelector('#signupuser').value.trim();
+  const theemail = document.querySelector('#signupemail').value.trim();
+  const thepass = document.querySelector('#signuppass').value.trim();
+  const thelanguage = document.querySelector('#signuplanguage').value;
+  const thetheme = document.querySelector('#signuptheme').value;
   console.log(theuser, theemail, thepass, thelanguage, thetheme);
 
   if (theuser && theemail && thepass) {
