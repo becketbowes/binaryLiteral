@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
 //this will create the edit page
 router.get('/:id', (req, res) => {
     console.log('edit page router.get', req.session.readerid);
-    Literal.findOne({
+    Literal.findByPk(req.params.id, {
 
         //THIS!!!
 
