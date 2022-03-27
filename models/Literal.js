@@ -31,7 +31,7 @@ Literal.init(
             type: DataTypes.TEXT,
             allowNull: false
         },
-        readerKey: {
+        readerkey: {
             type: DataTypes.INTEGER,
             references: { model: 'reader', key: 'id' }
         }
