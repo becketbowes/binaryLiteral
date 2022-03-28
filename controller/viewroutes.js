@@ -28,7 +28,7 @@ router.get('/literal/:id', (req, res) => {
         attributes: ['id', 'title', 'image', 'imageAlt', 'keywords', 'article', 'createdAt',
                 [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalkey)'), 'ohNeat' ]],
         include: [
-                { model: Comment, attributes: ['id', 'text', 'createdAt',], include: { model: Literal, attributes: ['title'] }},
+                { model: Comment, attributes: ['id', 'text', 'createdAt'], include: [{ model: Literal, attributes: ['title'] }, { model:Reader, attributes: ['user']}]},
                 { model: Reader, attributes: ['user']}]    
         })
     .then(data => { 
