@@ -1,5 +1,5 @@
 const sequelize = require('../../controller/connection');
-const { Neat } = require('../Neat');
+const { Neat } = require('../');
 
 const neatdata = [
   {

@@ -29,6 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(controller);
 
-sequelize.sync({ force: true }).then(() => {
+sequelize.sync({ force: false }).then(() => {
     app.listen(PORT, () => console.log('On Air'));
 });

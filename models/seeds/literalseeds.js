@@ -1,4 +1,5 @@
-const { Literal } = require('../Literal');
+const sequelize = require('../../controller/connection');
+const { Literal } = require('../');
 
 const literaldata = [
   {
