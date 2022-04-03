@@ -58,32 +58,35 @@ router.put('/neat', (req, res) => {
     if (req.session) {
         Neat.create({ ...req.body, user: req.session.user}, { Neat, Comment, Reader })
         .then(() => {
-            return Literal.findOne({ where: { id: req.body.literalkey },
-                    attributes: [ 'id', 'title', 'keywords', 'article', 'createdAt', 
+            console.log(req.body);
+            return Literal.findOne({ where: { id: req.body.literalkey },    
+                attributes: [ 'id', 'title', 'keywords', 'article', 'createdAt', 
                         [ sequelize.literal('(SELECT COUNT(*) FROM neat WHERE literal.id = neat.literalkey)'), 'ohNeat' ]]
             })
         })
         .then(data => res.json(data))
-        .catch(err => res.json(err));
+        .catch(err => { console.log(err); res.status(500).json(err); });
     }
 });
 
 //update a literal title
 router.put('/title/:id', (req, res) => {
-    Literal.update({ title: req.body.title, }, { where: { id: req.body.id }})
+    console.log(req.body);
+    Literal.update({ title: req.body.newTitle, }, { where: { id: req.body.literalkey }})
     .then(data => {
         if (!data) {
             res.status(404).json({ message: 'no such literal' });
             return;
         }
+        console.log(data);
         res.json(data);
     })
     .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
 //update a literal image
-router.put('/title/:id', (req, res) => {
-    Literal.update({ image: req.body.image, }, { where: { id: req.body.id }})
+router.put('/image/:id', (req, res) => {
+    Literal.update({ image: req.body.newImage, }, { where: { id: req.body.literalkey }})
     .then(data => {
         if (!data) {
             res.status(404).json({ message: 'no such literal' });
@@ -94,9 +97,23 @@ router.put('/title/:id', (req, res) => {
     .catch(err => { console.log(err); res.status(500).json(err); });
 });
 
+//update a literal image alt
+router.put('/imgalt/:id', (req, res) => {
+    Literal.update({ image: req.body.newImgAlt, }, { where: { id: req.body.literalkey }})
+    .then(data => {
+        if (!data) {
+            res.status(404).json({ message: 'no such literal' });
+            return;
+        }
+        res.json(data);
+    })
+    .catch(err => { console.log(err); res.status(500).json(err); });
+});
+
+
 //update a literal's keywords
-router.put('/keyword/:id', (req, res) => {
-    Literal.update({ keywords: req.body.keywords, }, { where: { id: req.body.id }})
+router.put('/keywords/:id', (req, res) => {
+    Literal.update({ keywords: req.body.newKeywords, }, { where: { id: req.body.literalkey }})
     .then(data => {
         if (!data) {
             res.status(404).json({ message: 'no such literal' });
@@ -109,7 +126,7 @@ router.put('/keyword/:id', (req, res) => {
 
 //update a literal's article
 router.put('/article/:id', (req, res) => {
-    Literal.update({ article: req.body.article, }, { where: { id: req.body.id }})
+    Literal.update({ article: req.body.newArticle, }, { where: { id: req.body.literalkey }})
     .then(data => {
         if (!data) {
             res.status(404).json({ message: 'no such literal' });

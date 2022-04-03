@@ -1,4 +1,3 @@
-<section>
     <form class="editor">
         <div>
             <h3>Welcome to the Edit Suite:</h3>
@@ -6,26 +5,30 @@
         <div>
             <label for="title">Edit the title of your article:</label>
             <textarea name="title" id="title">{{title}}</textarea>
+            <button class="edittitle">Edit Title -></button>
         </div>
         <div>
             <label for="imagename">Edit the image name:</label>
             <textarea name="imagename" id="imagename">{{image}}</textarea>
+            <button class="editimage">Edit Image -></button>
         </div>
         <div>
-            <label for="imagename">Edit the image alt text:</label>
+            <label for="altimgtext">Edit the image alt text:</label>
             <textarea name="altimgtext" id="altimgtext">{{imageAlt}}</textarea>
+            <button class="editimagealt">Edit Image Alt Text -></button>
         </div>
         <div>
             <label for="keywords">Edit the keywords:</label>
             <textarea name="keywords" id="keywords">{{keywords}}</textarea>
+            <button class="editkeywords">Edit Key Words -></button>
         </div>
         <div>
             <label for="textfield">Edit the article:</label>
             <textarea name="textfield" id="textfield">{{article}}</textarea>
+            <button class="editarticle">Edit Article -></button>
         </div>
         <div>
-            <button type="submit" id="publish">republish -></button>
+            <button class="deletearticle">Delete Article -></button>
         </div>
     </form>
-</section>
-{{!-- script here --}}
+<script src="/assets/script/edit.js"></script>

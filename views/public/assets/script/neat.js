@@ -1,8 +1,9 @@
 async function neatCall(event) {
-    event.preventDefault();
+    // event.preventDefault = true;
 
-    const id = window.location.toString().split('/')[ window.location.toString().split('/').length - 1 ];
-    
+    const id = event.target.id;
+    console.log('window id: ', id);
+
     const res = await fetch('/api/literals/neat', {
         method: 'PUT',
         body: JSON.stringify({ literalkey: id }),

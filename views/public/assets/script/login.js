@@ -20,4 +20,4 @@ async function loginCall(event) {
     }
 };
 
-document.querySelector('.login').addEventListener('submit', loginCall);
+document.querySelector('.login').addEventListener('click', loginCall);

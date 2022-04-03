@@ -1,13 +1,12 @@
 <div>
-<article>
-    {{#each articles}}
-    <img src="/assets/img/{{image}}" alt="{{imageAlt}}">
-    <h3>{{title}}</h3>
-    <h4>Written by {{reader.user}} on: {{createdAt}}, keywords: {{keywords}}</h4>
-    <section>{{article}}</section>
-    <h4><a><button type="button" class="neatasabutton" id="neatasabutton">Neat!</button></a> {{ohNeat}} people thought this was neat. <a href="/literal/{{id}}">{{comments.length}} comments -></a></h4>
-    {{/each}}
-</article>
+    <article>
+        {{#each articles}}
+        <img src="/assets/img/{{image}}" alt="{{imageAlt}}">
+        <h3>{{title}}</h3>
+        <h4>Written by {{reader.user}} on: {{createdAt}}, keywords: {{keywords}}</h4>
+        <section>{{article}}</section>
+        <h4><a><button type="button" class="neatasabutton" id="{{id}}">Neat!</button></a> {{ohNeat}} people thought this was neat. <a href="/literal/{{id}}">{{comments.length}} comments -></a></h4>
+        {{/each}}
+    </article>
 </div>
 <script src="/assets/script/neat.js"></script>
-<script src="/assets/script/literal.js"></script>

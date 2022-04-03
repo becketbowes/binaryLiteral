@@ -29,6 +29,7 @@
     </form>
 </section>
 <article>
+    <h3>Past Articles:</h3>
     {{#each literals}}
     <img src="/assets/img/{{image}}" alt="{{imageAlt}}">
     <h3>Written by {{reader.user}} on: {{createdAt}}, keywords: {{keywords}}</h3>
@@ -39,4 +40,5 @@
 </article>
 {{#if loggedin}}
 <script src="/assets/script/write.js"></script>
+<script src="/assets/script/neat.js"></script>
 {{/if}}
