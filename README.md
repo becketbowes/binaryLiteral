@@ -3,8 +3,10 @@
 
   ![binaryLiteral screenshot](./assets/img/readme/blreadme.jpg)
 
+  [deployed heroku address](https://binaryliteral.herokuapp.com/)
+
   ## OVERVIEW:
-   technology and culture blog. This is an interactive website to showcase the events in my community in a style that has more flavor than generic social media. Social media doesn't have the personality inherent to, say, counter culture 'zines that i grew up with. This is an attempt to bring some of that 'zine flavor to a digital forum.
+   Technology and culture blog. This is an interactive website to showcase the events in my community in a style that has more flavor than generic social media. Social media doesn't have the personality inherent to, say, counter culture 'zines that i grew up with. This is an attempt to bring some of that 'zine flavor to a digital forum.
 
   ## Table Of Contents:
   [Installation](README.md#installation)<br>
@@ -18,7 +20,7 @@
   On logging in, you have the option to view the entire site in black on white, white on black, binary, or english (the binary/english version is turned off currently for grading purposes). You are then able to contribute your own content and participate in the conversation.
 
   ## Usage
-  The website should user-intuitive.
+  All buttons on the nav console will lead to the login page until logged in. Thereafter, the home button on the left will take you to the main page with all 'literals' (articles). The central button will lead you to the write suite, and once you've written something, editing functions for those articles are below on the page. The left nav button will log you out.
 
   ## Tests
   Insomnia was used for testing in the creation of this site. 
